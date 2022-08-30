@@ -38,6 +38,8 @@ test_script:
 
     msbuild /t:CopyCryptestToRoot cryptest.vcxproj
 
+    .\cryptest.exe tv chacha
+
 artifacts:
   - path: x64\Output\Release
     name: Build Output
