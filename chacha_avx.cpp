@@ -41,12 +41,12 @@ extern const char CHACHA_AVX_FNAME[] = __FILE__;
 // https://github.com/weidai11/cryptopp/issues/735. The
 // 649 issue affects AES but it is the same here. The 735
 // issue is ChaCha AVX2 cut-in where it surfaced again.
-/*#if (_MSC_VER >= 1910) && (_MSC_VER < 1916)
+#if (_MSC_VER >= 1910) && (_MSC_VER < 1916)
 # ifndef CRYPTOPP_DEBUG
 #  pragma optimize("", off)
 #  pragma optimize("ts", on)
 # endif
-#endif*/
+#endif
 
 // The data is aligned, but Clang issues warning based on type
 // and not the actual alignment of the variable and data.
