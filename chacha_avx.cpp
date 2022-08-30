@@ -59,13 +59,13 @@ ANONYMOUS_NAMESPACE_BEGIN
 #if (CRYPTOPP_AVX2_AVAILABLE)
 
 template <unsigned int R>
-inline __m256i RotateLeft(const __m256i val)
+__declspec(noinline) __m256i RotateLeft(const __m256i val)
 {
     return _mm256_or_si256(_mm256_slli_epi32(val, R), _mm256_srli_epi32(val, 32-R));
 }
 
 template <>
-inline __m256i RotateLeft<8>(const __m256i val)
+__declspec(noinline) __m256i RotateLeft<8>(const __m256i val)
 {
     const __m256i mask = _mm256_set_epi8(14,13,12,15, 10,9,8,11, 6,5,4,7, 2,1,0,3,
                                          14,13,12,15, 10,9,8,11, 6,5,4,7, 2,1,0,3);
@@ -73,7 +73,7 @@ inline __m256i RotateLeft<8>(const __m256i val)
 }
 
 template <>
-inline __m256i RotateLeft<16>(const __m256i val)
+__declspec(noinline) __m256i RotateLeft<16>(const __m256i val)
 {
     const __m256i mask = _mm256_set_epi8(13,12,15,14, 9,8,11,10, 5,4,7,6, 1,0,3,2,
                                          13,12,15,14, 9,8,11,10, 5,4,7,6, 1,0,3,2);
