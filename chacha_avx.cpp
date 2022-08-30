@@ -41,7 +41,7 @@ extern const char CHACHA_AVX_FNAME[] = __FILE__;
 // https://github.com/weidai11/cryptopp/issues/735. The
 // 649 issue affects AES but it is the same here. The 735
 // issue is ChaCha AVX2 cut-in where it surfaced again.
-#if (_MSC_VER >= 1910) && (_MSC_VER < 1916)
+#if (_MSC_VER >= 1910) && (_MSC_VER <= 1916)
 # ifndef CRYPTOPP_DEBUG
 #  pragma optimize("", off)
 #  pragma optimize("ts", on)
@@ -125,7 +125,7 @@ void ChaCha_OperateKeystream_AVX2(const word32 *state, const byte* input, byte *
     __m256i X3_2 = state2;
     __m256i X3_3 = _mm256_add_epi32(state3, CTR3);
 
-    for (int i = 0; i < static_cast<int>(rounds) / 2; i++)
+    for (int i = static_cast<int>(rounds); i > 0; i -= 2)
     {
         X0_0 = _mm256_add_epi32(X0_0, X0_1);
         X1_0 = _mm256_add_epi32(X1_0, X1_1);
